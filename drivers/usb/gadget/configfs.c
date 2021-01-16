@@ -286,6 +286,8 @@ static ssize_t gadget_dev_desc_UDC_show(struct config_item *item, char *page)
 	ret = sprintf(page, "%s\n", udc_name ?: "");
 	mutex_unlock(&gi->lock);
 
+=======
+>>>>>>> 30bb6cf90cee2481db747e627b7d7dd58376e8f4
 	return ret;
 }
 
