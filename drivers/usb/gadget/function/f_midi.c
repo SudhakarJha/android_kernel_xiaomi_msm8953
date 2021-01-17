@@ -1080,8 +1080,7 @@ static int f_midi_bind(struct usb_configuration *c, struct usb_function *f)
 		f->ss_descriptors = usb_copy_descriptors(midi_ss_function);
 		if (!f->ss_descriptors)
 			goto fail_f_midi;
-=======
->>>>>>> 30bb6cf90cee2481db747e627b7d7dd58376e8f4
+
 	}
 
 	kfree(midi_function);

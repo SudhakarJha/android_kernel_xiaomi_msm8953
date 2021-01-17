@@ -662,8 +662,7 @@ static ssize_t acc_read(struct file *fp, char __user *buf,
 	struct acc_dev *dev = fp->private_data;
 	struct usb_request *req;
 	ssize_t r = count, xfer, len;
-=======
->>>>>>> 30bb6cf90cee2481db747e627b7d7dd58376e8f4
+
 	int ret = 0;
 
 	pr_debug("acc_read(%zu)\n", count);
@@ -685,8 +684,7 @@ static ssize_t acc_read(struct file *fp, char __user *buf,
 	}
 
 	len = ALIGN(count, dev->ep_out->maxpacket);
-=======
->>>>>>> 30bb6cf90cee2481db747e627b7d7dd58376e8f4
+
 
 	if (dev->rx_done) {
 		// last req cancelled. try to get it.
@@ -698,8 +696,7 @@ requeue_req:
 	/* queue a request */
 	req = dev->rx_req[0];
 	req->length = len;
-=======
->>>>>>> 30bb6cf90cee2481db747e627b7d7dd58376e8f4
+
 	dev->rx_done = 0;
 	ret = usb_ep_queue(dev->ep_out, req, GFP_KERNEL);
 	if (ret < 0) {
@@ -961,8 +958,7 @@ int acc_ctrlrequest(struct usb_composite_dev *cdev,
 			b_requestType, b_request,
 			w_value, w_index, w_length);
 */
-=======
->>>>>>> 30bb6cf90cee2481db747e627b7d7dd58376e8f4
+
 
 	if (b_requestType == (USB_DIR_OUT | USB_TYPE_VENDOR)) {
 		if (b_request == ACCESSORY_START) {
@@ -1348,8 +1344,7 @@ static int acc_setup(void)
 	INIT_DELAYED_WORK(&dev->start_work, acc_start_work);
 	INIT_WORK(&dev->hid_work, acc_hid_work);
 
-=======
->>>>>>> 30bb6cf90cee2481db747e627b7d7dd58376e8f4
+
 	ret = misc_register(&acc_device);
 	if (ret)
 		goto err_zap_ptr;
@@ -1357,8 +1352,6 @@ static int acc_setup(void)
 	/* _acc_dev must be set before calling usb_gadget_register_driver */
 	_acc_dev = dev;
 
-=======
->>>>>>> 30bb6cf90cee2481db747e627b7d7dd58376e8f4
 	return 0;
 
 err_zap_ptr:
