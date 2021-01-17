@@ -48,6 +48,7 @@ static void ip6_datagram_flow_key_init(struct flowi6 *fl6, struct sock *sk)
 	fl6->fl6_dport = inet->inet_dport;
 	fl6->fl6_sport = inet->inet_sport;
 	fl6->flowlabel = np->flow_label;
+	fl6->flowi6_uid = sk->sk_uid;
 	if (!fl6->flowi6_oif)
 		fl6->flowi6_oif = np->sticky_pktinfo.ipi6_ifindex;
 	if (!fl6->flowi6_oif && ipv6_addr_is_multicast(&fl6->daddr))
@@ -129,8 +130,6 @@ int __ip6_datagram_connect(struct sock *sk, struct sockaddr *uaddr,
 	__be32			old_dport;
 	int			addr_type;
 	int			err;
-=======
->>>>>>> 30bb6cf90cee2481db747e627b7d7dd58376e8f4
 	if (usin->sin6_family == AF_INET) {
 		if (__ipv6_only_sock(sk))
 			return -EAFNOSUPPORT;
@@ -201,14 +200,10 @@ ipv4_connected:
 			goto out;
 		}
 	}
-=======
->>>>>>> 30bb6cf90cee2481db747e627b7d7dd58376e8f4
 	/* save the current peer information before updating it */
 	old_daddr = sk->sk_v6_daddr;
 	old_fl6_flowlabel = np->flow_label;
 	old_dport = inet->inet_dport;
-=======
->>>>>>> 30bb6cf90cee2481db747e627b7d7dd58376e8f4
 	sk->sk_v6_daddr = *daddr;
 	np->flow_label = fl6_flowlabel;
 	inet->inet_dport = usin->sin6_port;
@@ -226,8 +221,6 @@ ipv4_connected:
 		inet->inet_dport = old_dport;
 		goto out;
 	}
-=======
->>>>>>> 30bb6cf90cee2481db747e627b7d7dd58376e8f4
 	sk->sk_state = TCP_ESTABLISHED;
 	sk_set_txhash(sk);
 out:
