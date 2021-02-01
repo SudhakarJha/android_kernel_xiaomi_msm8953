@@ -800,6 +800,7 @@ void __noreturn do_exit(long code)
 #else
 		pr_alert("Fixing recursive fault but reboot is needed!\n");
 <<<<<<< HEAD
+<<<<<<< HEAD
 #endif
 		/*
 		 * We can do this unlocked here. The futex code uses
@@ -814,11 +815,15 @@ void __noreturn do_exit(long code)
 =======
 		futex_exit_done(tsk);
 >>>>>>> 2c116895783b... futex: Replace PF_EXITPIDONE with a state
+=======
+		futex_exit_recursive(tsk);
+>>>>>>> 32d782808b84... futex: Mark the begin of futex exit explicitly
 		set_current_state(TASK_UNINTERRUPTIBLE);
 		schedule();
 	}
 
 	exit_signals(tsk);  /* sets PF_EXITING */
+<<<<<<< HEAD
 
 	sched_exit(tsk);
 	schedtune_exit_task(tsk);
@@ -837,6 +842,8 @@ void __noreturn do_exit(long code)
 	 * mm_release() -> exit_pi_state_list().
 	 */
 	raw_spin_unlock_wait(&tsk->pi_lock);
+=======
+>>>>>>> 32d782808b84... futex: Mark the begin of futex exit explicitly
 
 	/* sync mm's RSS info before statistics gathering */
 	if (tsk->mm)
