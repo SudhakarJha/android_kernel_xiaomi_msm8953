@@ -1,8 +1,6 @@
 #ifndef _LINUX_FUTEX_H
 #define _LINUX_FUTEX_H
 
-#include <linux/sched.h>
-
 #include <uapi/linux/futex.h>
 
 struct inode;
@@ -55,22 +53,14 @@ union futex_key {
 #define FUTEX_KEY_INIT (union futex_key) { .both = { .ptr = 0ULL } }
 
 #ifdef CONFIG_FUTEX
-static inline void futex_init_task(struct task_struct *tsk)
-{
-	tsk->robust_list = NULL;
-#ifdef CONFIG_COMPAT
-	tsk->compat_robust_list = NULL;
-#endif
-	INIT_LIST_HEAD(&tsk->pi_state_list);
-	tsk->pi_state_cache = NULL;
-}
-
-void futex_mm_release(struct task_struct *tsk);
-
-long do_futex(u32 __user *uaddr, int op, u32 val, ktime_t *timeout,
-	      u32 __user *uaddr2, u32 val2, u32 val3);
+extern void exit_robust_list(struct task_struct *curr);
+extern void exit_pi_state_list(struct task_struct *curr);
 #else
-static inline void futex_init_task(struct task_struct *tsk) { }
-static inline void futex_mm_release(struct task_struct *tsk) { }
+static inline void exit_robust_list(struct task_struct *curr)
+{
+}
+static inline void exit_pi_state_list(struct task_struct *curr)
+{
+}
 #endif
 #endif
