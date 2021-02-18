@@ -462,9 +462,12 @@
  */
 #define TEXT_TEXT							\
 		ALIGN_FUNCTION();					\
+<<<<<<< HEAD
 		*(.text.hot TEXT_MAIN .text.fixup .text.unlikely)	\
 		*(.text..ftrace)					\
 		*(TEXT_CFI_MAIN) 					\
+=======
+>>>>>>> v4.9.252
 		*(.ref.text)						\
 	MEM_KEEP(init.text)						\
 	MEM_KEEP(exit.text)						\
